@@ -5,3 +5,6 @@ To use the same IP address, never stop your server or assign an elastic IP addre
 
 ## HTTPS, TLS, and Web certificates
 By shelling into my web domain, I can edit the Caddyfile with my domain's name to make it a secure `https` website
+
+## Deploying my website
+Using a `deployFiles.sh` -- `./debloyFiles.sh -k <mypemkey> -h <mydomain> -s <service>` Service is defined as the part before domain name
