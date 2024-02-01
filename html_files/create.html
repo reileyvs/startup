@@ -19,7 +19,7 @@
         </ul>
             <header><h4>Hair Specifications</h4></header>
                 <fieldset>
-                    <legend>Hair types</legend>
+                    <legend>Compatible hair types</legend>
                     <label for="checkbox1">Straight</label>
                     <input type="checkbox" id="checkbox1" name="varCheckbox" value="checkbox1" />
                     <label for="checkbox2">Wavy</label>
@@ -28,6 +28,23 @@
                     <input type="checkbox" id="checkbox3" name="varCheckbox" value="checkbox3" />
                     <label for="checkbox4">Very curly</label>
                     <input type="checkbox" id="checkbox4" name="varCheckbox" value="checkbox4" /> 
+                    <label for="checkbox5">Thin</label>
+                    <input type="checkbox" id="checkbox5" name="varCheckbox" value="checkbox5" />
+                    <label for="checkbox6">Thick</label>
+                    <input type="checkbox" id="checkbox6" name="varCheckbox" value="checkbox6" />
                 </fieldset>
+                <form action="formSubmit.html" method="post">
+                    <ul>
+                        <li>
+                            <label for="text">Hair side length: </label>
+                            <input type="text" id="text" name="varText" required pattern="\d*" />
+                        </li>
+                        <li>
+                            <label for="text">Hair top length: </label>
+                            <input type="text" name="varText" id="text" required pattern="\d*" />
+
+                        </li>
+                    </ul>
+                </form>
     </form>
 </body>
