@@ -25,3 +25,14 @@ This is a rough sketch of the web application design
 - **DB/Login:** Store Haircut, user info in database
 - **WebSocket:** Notifications when a new haircut is submitted
 - **React:** Application ported to use the React web framework
+
+##HTML Deliverable
+
+For this deliverable I built the structure of my website using HTML in the following ways:
+
+- **HTML Pages** - Three HTML pages for login and profile info, creating, and browsing haircuts
+- **Links** - All three pages can access each other
+- **Text** - Descriptions for each fill form and filler text for various haircuts
+- **Images** - Filler images for each haircut
+- **DB/Login** - Input boxes and submit buttons for login and haircut creation
+- **WebSocket** - Nothing for this here, yet
