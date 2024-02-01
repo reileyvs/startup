@@ -35,4 +35,4 @@ For this deliverable I built the structure of my website using HTML in the follo
 - **Text** - Descriptions for each fill form and filler text for various haircuts
 - **Images** - Filler images for each haircut
 - **DB/Login** - Input boxes and submit buttons for login and haircut creation
-- **WebSocket** - Nothing for this here, yet
+- **WebSocket** - Placeholder for real-time notifcations
