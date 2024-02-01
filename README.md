@@ -26,7 +26,7 @@ This is a rough sketch of the web application design
 - **WebSocket:** Notifications when a new haircut is submitted
 - **React:** Application ported to use the React web framework
 
-##HTML Deliverable
+## HTML Deliverable
 
 For this deliverable I built the structure of my website using HTML in the following ways:
 
