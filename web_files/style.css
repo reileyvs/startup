@@ -2,5 +2,11 @@ body {
     font-family: Georgia;
 }
 body > header > h3 {
-    color:goldenrod
+    color:goldenrod;
+}
+fieldset {
+    background-color: rgb(239, 239, 239);
+}
+fieldset > legend {
+    padding-bottom: .7em;
 }
