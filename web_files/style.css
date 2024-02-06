@@ -1,8 +1,9 @@
 body {
-    font-family: Georgia;
+    font-family: Calibri;
 }
 body > header > h3 {
     color:goldenrod;
+    color:
 }
 fieldset {
     background-color: rgb(239, 239, 239);
@@ -20,4 +21,5 @@ nav > a {
 }
 nav > a:hover {
     background-color: antiquewhite;
+    color:#393939 ;
 }
