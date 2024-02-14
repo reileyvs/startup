@@ -36,3 +36,12 @@ For this deliverable I built the structure of my website using HTML in the follo
 - **Images** - Filler images for each haircut
 - **DB/Login** - Input boxes and submit buttons for login and haircut creation
 - **WebSocket** - Placeholder for real-time notifcations
+
+##CSS Deliverable
+
+For this deliverable, I added style to the existing HTML elements
+
+- **Header, footer, main** - Added bootstrap elements to header and main
+- **Nav** - Added bootstrap navbar to header
+- **Resizing** - Used flex and bootstrap for window resizing
+- **Elements, text, and images** - Used a combination of bootstrap elements and CSS for elements, and changed the default font
