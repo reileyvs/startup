@@ -45,3 +45,12 @@ For this deliverable, I added style to the existing HTML elements
 - **Nav** - Added bootstrap navbar to header
 - **Resizing** - Used flex and bootstrap for window resizing
 - **Elements, text, and images** - Used a combination of bootstrap elements and CSS for elements, and changed the default font
+
+##JavaScript Deliverable
+
+For this deliverable, I added functionality to all existing buttons
+
+- **Login** - When you enter and submit a username, your name is displayed on the page
+- **Database** - Local storage saves haircut information and retrieves it to display
+- **WebSocket** - setInterval is used to change the username for notifications
+- **Application Logic** - Using the create page to submit a haircut displays your haircut on the Cuts/Browse page
