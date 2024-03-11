@@ -1,2 +1,2 @@
 #Ignore modules
-startup/web-files/node_modules/
+web-files/node_modules/
