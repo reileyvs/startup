@@ -1,3 +1,23 @@
+async function fetchCuts() {
+    let cuts = [];
+  try {
+    // Get the latest high scores from the service
+    const response = await fetch('/api/cuts');
+    scores = await response.json();
+
+    // Save the scores in case we go offline in the future
+    localStorage.setItem('cuts', JSON.stringify(cuts));
+  } catch {
+    // If there was an error then just use the last saved scores
+    const cutsText = localStorage.getItem('cuts');
+    if (cutsText) {
+      cuts = JSON.parse(cutsText);
+    }
+  }
+  //TODO: IMPLEMENT displayCuts()
+  displayCuts(cuts);
+}
+
 function saveItem() {
     // const imgElement = document.getElementById("file");
     // imgElement.addEventListener(onchange, handleImageUpload);
@@ -15,7 +35,7 @@ function saveItem() {
     window.location.href = "create.html";
 }
 
-function createItem() {
+async function createItem() {
     const cardItem = document.createElement("div");
     cardItem.className = "col-sm";
     const card = document.createElement("div");
@@ -44,7 +64,22 @@ function createItem() {
     cardBody.appendChild(top);
     const tempCont = document.createElement("div");
     tempCont.appendChild(cardItem);
-    localStorage.setItem("element", tempCont.innerHTML);
+    don = localStorage.getItem("element");
+    deen = don + tempCont.innerHTML;
+    localStorage.setItem("element", deen);
+
+    try {
+        const response = await fetch('/api/cuts', {
+          method: 'POST',
+          headers: {'content-type': 'application/json'},
+          body: JSON.stringify(localStorage.getItem("element")),
+        });
+  
+        const scores = await response.json();
+        localStorage.setItem("element", JSON.stringify("element"));
+      } catch {
+        window.alert("Newest haircuts couldn't be loaded");
+      }
 }
 
 
