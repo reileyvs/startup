@@ -54,3 +54,13 @@ For this deliverable, I added functionality to all existing buttons
 - **Database** - Local storage saves haircut information and retrieves it to display
 - **WebSocket** - setInterval is used to change the username for notifications
 - **Application Logic** - Using the create page to submit a haircut displays your haircut on the Cuts/Browse page
+
+## Web Service Deliverable
+
+I added Node.js/Express HTTP Service in this deliverable
+
+- **Node.js/Express** - Done
+- **Static Middleware** - Done
+- **Calls to third-party endpoints** - I felt that my website did not need these
+- **Backend Service Endpoints** - Working on it!
+- **Frontend calls service endpoints** - Almost there
