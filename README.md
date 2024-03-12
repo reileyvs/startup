@@ -37,7 +37,7 @@ For this deliverable I built the structure of my website using HTML in the follo
 - **DB/Login** - Input boxes and submit buttons for login and haircut creation
 - **WebSocket** - Placeholder for real-time notifcations
 
-##CSS Deliverable
+## CSS Deliverable
 
 For this deliverable, I added style to the existing HTML elements
 
@@ -46,7 +46,7 @@ For this deliverable, I added style to the existing HTML elements
 - **Resizing** - Used flex and bootstrap for window resizing
 - **Elements, text, and images** - Used a combination of bootstrap elements and CSS for elements, and changed the default font
 
-##JavaScript Deliverable
+## JavaScript Deliverable
 
 For this deliverable, I added functionality to all existing buttons
 
