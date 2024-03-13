@@ -62,5 +62,5 @@ I added Node.js/Express HTTP Service in this deliverable
 - **Node.js/Express** - Done
 - **Static Middleware** - Done
 - **Calls to third-party endpoints** - I felt that my website did not need these
-- **Backend Service Endpoints** - Working on it!
-- **Frontend calls service endpoints** - Almost there
+- **Backend Service Endpoints** - Uses endpoints instead of local storage for haircut generation!
+- **Frontend calls service endpoints** - Uses endpoints
