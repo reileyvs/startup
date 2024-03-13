@@ -1,21 +1,28 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
 
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
 app.use(express.json());
-
+app.use(bodyParser.text());
 app.use(express.static('public'));
 
-var apiRouter = express.Router();
-app.use(`/api`, apiRouter);
 
-apiRouter.get('/cuts', (_req, res) => {
+var apiRouter = express.Router();
+app.use('/api', apiRouter);
+
+let cuts = [];
+apiRouter.get('/get-cuts', (_req, res) => {
     res.send(cuts);
 })
 
-apiRouter.post('/cuts', (req, res) => {
+apiRouter.post('/post-cut', (req, res) => {
+    cuts = updateCuts(req.body, cuts);
+    console.log(req.body);
+    console.log("1");
     res.send(cuts);
+    //
 })
 
 app.use((_req, res) => {
@@ -26,7 +33,6 @@ app.listen(4000, () => {
     console.log(`Web service listening on port 4000`);
   });
 
-let cuts = [];
 function updateCuts(newCut, cuts) {
     cuts.push(newCut);
     return cuts;

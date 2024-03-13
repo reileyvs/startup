@@ -1,37 +1,31 @@
 async function fetchCuts() {
-    let cuts = [];
   try {
-    // Get the latest high scores from the service
-    const response = await fetch('/api/cuts');
-    scores = await response.json();
-
-    // Save the scores in case we go offline in the future
-    localStorage.setItem('cuts', JSON.stringify(cuts));
+    const response = await fetch('/api/get-cuts');
+    var cuts = await response.json();
+    debugger;
+    localStorage.setItem("element", JSON.stringify(cuts));
+    return cuts;
   } catch {
-    // If there was an error then just use the last saved scores
-    const cutsText = localStorage.getItem('cuts');
-    if (cutsText) {
-      cuts = JSON.parse(cutsText);
-    }
+    return localStorage.getItem("element");
   }
-  //TODO: IMPLEMENT displayCuts()
-  displayCuts(cuts);
 }
 
-function saveItem() {
+async function saveItem() {
     // const imgElement = document.getElementById("file");
     // imgElement.addEventListener(onchange, handleImageUpload);
-
+    const imgEl = document.getElementById("file");
     const nameEl = document.getElementById("text1");
     const sideEl = document.getElementById("text2");
     const topEl = document.getElementById("text3");
+    Imag = "image";
     Name = "hairName";
     Side = "hairSide";
     Top = "hairTop";
+    fields(Imag, imgEl);
     fields(Name, nameEl);
     fields(Side, sideEl);
     fields(Top, topEl);
-    createItem();
+    await createItem();
     window.location.href = "create.html";
 }
 
@@ -64,39 +58,27 @@ async function createItem() {
     cardBody.appendChild(top);
     const tempCont = document.createElement("div");
     tempCont.appendChild(cardItem);
-    don = localStorage.getItem("element");
-    deen = don + tempCont.innerHTML;
-    localStorage.setItem("element", deen);
-
+    don = await fetchCuts();
+    if(don.length > 1 && don[0] === "--No haircuts to display") {
+        don.splice(0, 1);
+        don = "";
+    }
+    //console.log(tempCont.innerHTML);
     try {
-        const response = await fetch('/api/cuts', {
+        const response = await fetch('/api/post-cut', {
           method: 'POST',
-          headers: {'content-type': 'application/json'},
-          body: JSON.stringify(localStorage.getItem("element")),
+          headers: 
+          {'Content-Type': 'text/plain'},
+          body: tempCont.innerHTML,
         });
-  
-        const scores = await response.json();
-        localStorage.setItem("element", JSON.stringify("element"));
-      } catch {
+        const cuts = await response.json();
+        localStorage.setItem("element", JSON.stringify(cuts));
+      } catch (ex) {
+        debugger;
         window.alert("Newest haircuts couldn't be loaded");
       }
 }
 
-
 function fields(nem, el){
     localStorage.setItem(nem, el.value);
 }
-
-// function handleImageUpload(event) {
-//     window.alert("entered");
-//     const file = event.target.files[0];
-//     //if(!file) return;
-
-//     const reader = new FileReader();
-//     reader.onload = function(e) {
-//         const base64Image = e.target.result;
-//         localStorage.setItem("image", base64Image);
-//     };
-//     reader.readAsDataURL(file);
-//     window.alert(localStorage.getItem("image"));
-// }

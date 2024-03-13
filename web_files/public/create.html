@@ -22,15 +22,15 @@
     </header>
 <main>
     <h3 class="text-center">Submit your own haircut!</h3>
-    <form action="formSubmit.html" method="post">
+    <!-- <form action="formSubmit.html" method="post"> -->
         <div class="row">
             <div class="col-sm">
         <ul>
             
                 
             <li>
-                <label for="image">Upload image(jpg): </label>
-                <input type="file" id="file" name="varFile" />
+                <label for="image">Upload image link: </label>
+                <input type="text" id="file" name="varFile" />
             </li>
             <li>
                 <label for="Text">Haircut Name: </label>
@@ -69,7 +69,7 @@
                 </fieldset>
         </div> -->
     </div>
-</form>
+<!-- </form> -->
 <button type="button" class="btn btn-dark" onclick=saveItem()>Submit</button>
 </main>
 <footer>
@@ -79,21 +79,20 @@
     <a href="https://github.com/reileyvs/startup">GitHub</a>
 </footer>
 <script>
-    const imgElement = document.getElementById("file");
-    imgElement.addEventListener("change", handleImageUpload);
+    // const imgElement = document.getElementById("file");
+    // imgElement.addEventListener("change", localStorage.setItem("image", imgElement.innerText));
 
-    function handleImageUpload(event) {
-    localStorage.removeItem("image");
-    const file = event.target.files[0];
-    if(!file) return;
+    // function handleImageUpload(event) {
+    // localStorage.removeItem("image");
+    // const file = event.target.files[0];
+    // if(!file) return;
 
-    const reader = new FileReader();
-    reader.onload = function(e) {
-        const base64Image = e.target.result;
-        localStorage.setItem("image", base64Image);
-    };
-    reader.readAsDataURL(file);
-}
+    // const reader = new FileReader();
+    // reader.onload = function(e) {
+    //     const base64Image = e.target.result;
+    //     localStorage.setItem("image", base64Image);
+    // };
+    // reader.readAsDataURL(file);
 </script>
 <script src="browse.js"></script>
 <script src="notification.js"></script>
