@@ -1,5 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const { MongoClient } = require('mongodb');
+
+const userName = 'something';
+const password = 'thisthing';
+const hostname = 'mongodb.com';
+
+const url = `mongodb+srv://${userName}:${password}@${hostname}`;
+const client = new MongoClient(url);
+
 const app = express();
 
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
