@@ -1,13 +1,24 @@
+const config = require('./dbConfig.json');
 const express = require('express');
 const bodyParser = require('body-parser');
 const { MongoClient } = require('mongodb');
 
-const userName = 'something';
-const password = 'thisthing';
-const hostname = 'mongodb.com';
-
-const url = `mongodb+srv://${userName}:${password}@${hostname}`;
+const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 const client = new MongoClient(url);
+const db = client.db('haircut');
+const PicCuts = client.db('haircut').collection('pics');
+const noPicCuts = client.db('haircut').collection('noPics');
+const userNames = client.db('users').collection('users');
+
+(async function testConnection() {
+    await client.connect();
+    await db.command({ ping: 1 });
+  })().catch((ex) => {
+    console.log(`Unable to connect to database with ${url} because ${ex.message}`);
+    process.exit(1);
+  });
+
+
 
 const app = express();
 
