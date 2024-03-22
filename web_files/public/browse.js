@@ -3,7 +3,12 @@ async function fetchCuts() {
     const response = await fetch('/api/get-cuts');
     var cuts = await response.json();
     debugger;
-    localStorage.setItem("element", JSON.stringify(cuts));
+    var arr = [];
+    cuts.forEach((obj) => {
+      arr.push(obj.haircut);
+  });
+    var test = JSON.stringify(arr);
+    localStorage.setItem("element", JSON.stringify(arr));
     return cuts;
   } catch {
     return localStorage.getItem("element");
@@ -72,7 +77,12 @@ async function createItem() {
           body: tempCont.innerHTML,
         });
         const cuts = await response.json();
-        localStorage.setItem("element", JSON.stringify(cuts));
+        var arr = [];
+        cuts.forEach((obj) => {
+        arr.push(obj.haircut);
+  });
+        var test = JSON.stringify(arr);
+        localStorage.setItem("element", JSON.stringify(arr));
       } catch (ex) {
         debugger;
         window.alert("Newest haircuts couldn't be loaded");
