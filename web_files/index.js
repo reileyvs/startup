@@ -58,7 +58,7 @@ apiRouter.post('/auth/create', async (req, res) => {
   if (await getUser(req.body.userName)) {
     res.status(409).send({ msg: 'Existing user' });
   } else {
-    const user = await createUser(req.body.userName, req.body.password);
+    const user = await createUser(req.body.userName);
     setAuthCookie(res, user.token);
     res.send({
       id: user._id,
@@ -69,11 +69,9 @@ apiRouter.post('/auth/create', async (req, res) => {
 app.post('/auth/login', async (req, res) => {
   const user = await getUser(req.body.userName);
   if (user) {
-    if (await bcrypt.compare(req.body.password, user.password)) {
       setAuthCookie(res, user.token);
       res.send({ id: user._id });
       return;
-    }
   }
   res.status(401).send({ msg: 'Unauthorized' });
 });
@@ -90,11 +88,9 @@ function getUser(userName) {
   return collection.findOne({ userName: userName });
 }
 
-async function createUser(userName, password) {
-  const passwordHash = await bcrypt.hash(password, 10);
+async function createUser(userName) {
   const user = {
     userName: userName,
-    password: passwordHash,
     token: uuid.v4(),
   };
   await collection.insertOne(user);
@@ -111,13 +107,13 @@ function setAuthCookie(res, authToken) {
 }
 
 let cuts = [];
-apiRouter.get('/get-cuts', (_req, res) => {
-  const cuts = DB.getHaircuts();
+apiRouter.get('/get-cuts', async (_req, res) => {
+  const cuts = await DB.getHaircuts();
   res.send(cuts);
 })
 
-apiRouter.post('/post-cut', (req, res) => {
-    cuts = addHaircut(req.body);
+apiRouter.post('/post-cut', async (req, res) => {
+    cuts = await DB.addHaircut(req.body);
     res.send(cuts);
 })
 
@@ -128,8 +124,3 @@ app.use((_req, res) => {
 app.listen(4000, () => {
     console.log(`Web service listening on port 4000`);
   });
-
-function updateCuts(newCut, cuts) {
-    cuts.push(newCut);
-    return cuts;
-}
