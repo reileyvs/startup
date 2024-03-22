@@ -36,11 +36,12 @@
   <script> 
     const doc = document.getElementById("haircuts");
     const htmlArray = JSON.parse(localStorage.getItem("element"));
-    htmlArray.reverse();
-    if(htmlArray.length > 12) {
-      htmlArray.length = 12;
+    arr = htmlArray;
+    arr = arr.reverse();
+    if(arr.length > 12) {
+      arr.length = 12;
     }
-    htmlArray.forEach(element => {
+    arr.forEach(element => {
       doc.insertAdjacentHTML('beforeend', element);
     });
     //localStorage.setItem("element", "--No haircuts to display");
