@@ -19,13 +19,16 @@ const cutCollection = db.collection('haircuts');
 });
 
 async function addHaircut(cut) {
-  cutCollection.insertOne(cut);
+  await cutCollection.insertOne({ haircut: cut });
   const cuts = await cutCollection.find().sort({createdAt: -1}).limit(12).toArray();
   return cuts;
 }
 
 async function getHaircuts() {
-  const cuts = await cutCollection.find().sort({createdAt: -1}).limit(12).toArray();
+  const cutz = await cutCollection.find().sort({createdAt: -1}).limit(12).toArray();
+  const cuts = cutz.map((doc) => ({
+    haircut: doc.haircut,
+  }));
   return cuts;
 }
 
