@@ -64,3 +64,13 @@ I added Node.js/Express HTTP Service in this deliverable
 - **Calls to third-party endpoints** - I felt that my website did not need these
 - **Backend Service Endpoints** - Uses endpoints instead of local storage for haircut generation!
 - **Frontend calls service endpoints** - Uses endpoints
+
+## Login/DB Deliverable
+
+Logged in users will see the value that they put for hair length and haircuts are stored in the database
+
+- **MongoDB DB** - created
+- **Data/credentials stored in DB** - done
+- **User registration** - creates account
+- **Existing user** - stores hair length
+- **Restricted functionality** - Not yet implemented
