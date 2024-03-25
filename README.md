@@ -73,4 +73,4 @@ Logged in users will see the value that they put for hair length and haircuts ar
 - **Data/credentials stored in DB** - done
 - **User registration** - creates account
 - **Existing user** - stores hair length
-- **Restricted functionality** - Not yet implemented
+- **Restricted functionality** - Cannot create haircut without logging in!
