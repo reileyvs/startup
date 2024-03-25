@@ -6,10 +6,13 @@ const uuid = require('uuid');
 const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
 const DB = require('./database.js');
+const authCookieName = 'token';
+
 
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 const client = new MongoClient(url);
 const db = client.db('lezi');
+const collection = db.collection('users');
 // const PicCuts = client.db('haircut').collection('pics');
 // const noPicCuts = client.db('haircut').collection('noPics');
 const userNames = client.db('lezi').collection('users');
@@ -55,10 +58,11 @@ var apiRouter = express.Router();
 app.use('/api', apiRouter);
 
 apiRouter.post('/auth/create', async (req, res) => {
-  if (await getUser(req.body.userName)) {
+  const info = JSON.parse(req.body);
+  if (await getUser(info.userName)) {
     res.status(409).send({ msg: 'Existing user' });
   } else {
-    const user = await createUser(req.body.userName);
+    const user = await createUser(info.userName);
     setAuthCookie(res, user.token);
     res.send({
       id: user._id,
@@ -66,17 +70,19 @@ apiRouter.post('/auth/create', async (req, res) => {
   }
 });
 
-app.post('/auth/login', async (req, res) => {
-  const user = await getUser(req.body.userName);
+apiRouter.post('/auth/login', async (req, res) => {
+  const info = JSON.parse(req.body);
+  const user = await getUser(info.userName);
+  console.log(info.userName);
   if (user) {
       setAuthCookie(res, user.token);
       res.send({ id: user._id });
       return;
   }
-  res.status(401).send({ msg: 'Unauthorized' });
+  res.status(401).send({ msg: 'Not an existing user' });
 });
 
-app.get('/user/me', async (req, res) => {
+apiRouter.get('/user/me', async (req, res) => {
   authToken = req.cookies['token'];
   const user = await collection.findOne({ token: authToken });
   if (user) {
@@ -99,7 +105,7 @@ async function createUser(userName) {
 }
 
 function setAuthCookie(res, authToken) {
-  res.cookie('token', authToken, {
+  res.cookie(authCookieName, authToken, {
     secure: true,
     httpOnly: true,
     sameSite: 'strict',
@@ -107,6 +113,24 @@ function setAuthCookie(res, authToken) {
 }
 
 let cuts = [];
+var secureApiRouter = express.Router();
+apiRouter.use(secureApiRouter);
+
+secureApiRouter.use(async (req, res, next) => {
+  authToken = req.cookies[authCookieName];
+  const user = await DB.getUserByToken(authToken);
+  if (user) {
+    next();
+  } else {
+    res.status(401).send({ msg: 'Login to submit a haircut' });
+  }
+});
+
+secureApiRouter.get('/checkCredents', async (_req, res) => {
+  res.send({ msg: 'AOK' });
+});
+
+
 apiRouter.get('/get-cuts', async (_req, res) => {
   const cuts = await DB.getHaircuts();
   res.send(cuts);

@@ -1,3 +1,5 @@
+const { ExplainVerbosity } = require("mongodb");
+
 async function fetchCuts() {
   try {
     const response = await fetch('/api/get-cuts');
@@ -18,6 +20,12 @@ async function fetchCuts() {
 async function saveItem() {
     // const imgElement = document.getElementById("file");
     // imgElement.addEventListener(onchange, handleImageUpload);
+    const response = await fetch('/api/checkCredents');
+    if(!response.ok) {
+      var me = response.json();
+      window.alert("Please log in first");
+      return;
+    }
     const imgEl = document.getElementById("file");
     const nameEl = document.getElementById("text1");
     const sideEl = document.getElementById("text2");

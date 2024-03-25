@@ -32,7 +32,12 @@ async function getHaircuts() {
   return cuts;
 }
 
+function getUserByToken(token) {
+  return userCollection.findOne({ token: token });
+}
+
 module.exports = {
   addHaircut,
   getHaircuts,
+  getUserByToken,
 };

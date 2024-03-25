@@ -7,7 +7,7 @@ async function login() {
         method: 'POST',
         headers:
         {'Content-Type': 'text/plain'},
-        body: JSON.stringify({ userName: nameEl, hairLength: hairLengthEl.value }),
+        body: JSON.stringify({ userName: nameEl.value, hairLength: hairLengthEl.value }),
     });
     if(!response.ok) {
         const body = await response.json();
@@ -24,7 +24,7 @@ async function create() {
         method: 'POST',
         headers:
         {'Content-Type': 'text/plain'},
-        body: JSON.stringify({ userName: nameEl, hairLength: hairLengthEl.value }),
+        body: JSON.stringify({ userName: nameEl.value, hairLength: hairLengthEl.value }),
     });
     if(!response.ok) {
         const body = await response.json();
