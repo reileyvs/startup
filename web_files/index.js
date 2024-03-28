@@ -62,7 +62,7 @@ apiRouter.post('/auth/create', async (req, res) => {
   if (await getUser(info.userName)) {
     res.status(409).send({ msg: 'Existing user' });
   } else {
-    const user = await createUser(info.userName);
+    const user = await createUser(info.userName, info.password);
     setAuthCookie(res, user.token);
     res.send({
       id: user._id,
@@ -73,11 +73,12 @@ apiRouter.post('/auth/create', async (req, res) => {
 apiRouter.post('/auth/login', async (req, res) => {
   const info = JSON.parse(req.body);
   const user = await getUser(info.userName);
-  console.log(info.userName);
   if (user) {
+    if (await bcrypt.compare(info.password, user.password)) {
       setAuthCookie(res, user.token);
       res.send({ id: user._id });
       return;
+    }
   }
   res.status(401).send({ msg: 'Not an existing user' });
 });
@@ -94,9 +95,12 @@ function getUser(userName) {
   return collection.findOne({ userName: userName });
 }
 
-async function createUser(userName) {
+async function createUser(userName, password) {
+  const passwordHash = await bcrypt.hash(password, 10);
+
   const user = {
     userName: userName,
+    password: passwordHash,
     token: uuid.v4(),
   };
   await collection.insertOne(user);
