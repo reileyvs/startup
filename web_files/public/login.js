@@ -11,11 +11,13 @@ async function login() {
         body: JSON.stringify({ userName: nameEl.value, password: passwordEl.value, hairLength: hairLengthEl.value }),
     });
     if(!response.ok) {
+        localStorage.setItem('username', "Mystery Person");
         const body = await response.json();
         window.alert(body.msg);
+    } else {
+        localStorage.setItem("username", nameEl.value);
+        localStorage.setItem("hairLength", hairLengthEl.value);    
     }
-    localStorage.setItem("username", nameEl.value);
-    localStorage.setItem("hairLength", hairLengthEl.value);
     window.location.href = "index.html";
 }
 async function create() {
