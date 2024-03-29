@@ -7,6 +7,7 @@ const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
 const DB = require('./database.js');
 const authCookieName = 'token';
+const { peerProxy } = require('./peerProxy.js');
 
 
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
@@ -149,6 +150,8 @@ app.use((_req, res) => {
     res.sendFile('index.html', { root: 'public' });
 })
 
-app.listen(4000, () => {
-    console.log(`Web service listening on port 4000`);
-  });
+const httpService = app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
+});
+
+peerProxy(httpService);
