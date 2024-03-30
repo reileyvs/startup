@@ -40,6 +40,7 @@ async function create() {
 }
 function logout() {
     localStorage.removeItem('username');
+    localStorage.removeItem('notif');
     fetch(`/api/auth/logout`, {
       method: 'delete',
     }).then(() => (window.location.href = '/'));
