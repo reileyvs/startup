@@ -84,6 +84,11 @@ apiRouter.post('/auth/login', async (req, res) => {
   res.status(401).send({ msg: 'Not an existing user' });
 });
 
+apiRouter.delete('/auth/logout', (_req, res) => {
+  res.clearCookie(authCookieName);
+  res.status(204).end();
+});
+
 apiRouter.get('/user/me', async (req, res) => {
   authToken = req.cookies['token'];
   const user = await collection.findOne({ token: authToken });
