@@ -74,3 +74,12 @@ Logged in users will see the value that they put for hair length and haircuts ar
 - **User registration** - creates account
 - **Existing user** - stores hair length
 - **Restricted functionality** - Cannot create haircut without logging in!
+
+## WebSocket Deliverable
+
+For this deliverable I used WebSocket to have real-time notifications of who creates haircuts
+
+- **Backend listens** - done
+- **Frontend makes connection** - done
+- **Data sent** - done
+- **Data displayed** - Found by clicking the Notifications button (If you have visited this website before now, it is likely you will have to delete your localStorage value for 'notif')
