@@ -1,10 +1,8 @@
-const { ExplainVerbosity } = require("mongodb");
 
 async function fetchCuts() {
   try {
     const response = await fetch('/api/get-cuts');
     var cuts = await response.json();
-    debugger;
     var arr = [];
     cuts.forEach((obj) => {
       arr.push(obj.haircut);
@@ -95,6 +93,14 @@ async function createItem() {
         debugger;
         window.alert("Newest haircuts couldn't be loaded");
       }
+        const msg = {
+          userName : localStorage.getItem('username'),
+        }
+        sup = JSON.stringify(msg);
+        soop = JSON.parse(sup);
+        console.log(sup);
+        console.log(soop);
+        await socket.send(JSON.stringify(msg));
 }
 
 function fields(nem, el){
