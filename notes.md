@@ -8,3 +8,10 @@ By shelling into my web domain, I can edit the Caddyfile with my domain's name t
 
 ## Deploying my website
 Using a `deployFiles.sh` -- `./debloyFiles.sh -k <mypemkey> -h <mydomain> -s <service>` Service is defined as the part before domain name
+
+## React Stuff
+
+### React Components
+
+The ` render ` function sends whatever it is as an HTML element.
+` useState ` returns a variable of the current state and a function to change it. Yeah, weird stuff
