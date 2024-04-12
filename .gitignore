@@ -1,12 +1,8 @@
 #Ignore modules
 web_files/node_modules/
 node_modules
-simon-service
-simon-html
-simon-css
-simon-javascript
-simon-login
 simon-websocket
 package-lock.json
 package.json
 web_tests
+simon-react

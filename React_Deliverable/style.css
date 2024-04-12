@@ -1,0 +1,38 @@
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+main {
+    display: flex;
+    flex-direction: column;
+}
+footer {
+    display: flex;
+    flex-direction: row;
+}
+body {
+    font-family: Calibri;
+}
+fieldset {
+    background-color: rgb(239, 239, 239);
+}
+fieldset > legend {
+    padding-bottom: .7em;
+}
+nav > div > a:hover, nav > div > button:hover {
+    background-color: #393939;
+    color:blue;
+}
+nav > a {
+    color: inherit;
+    padding: .4em;
+    border: .1em;
+    border-color: black;
+    border-style: solid;
+    box-sizing: border-box;
+}
+nav > a:hover {
+    background-color: rgb(255, 145, 0);
+    color:#393939 ;
+}
