@@ -12,6 +12,17 @@ export default function App() {
   const currentAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
   const [authState, setAuthState] = React.useState(currentAuthState);
 
+  const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+    const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+    socket.onmessage = async (message) => {
+      const thing = await message.data;
+      console.log(thing);
+      const msg = JSON.parse(message.data);
+        //Hank
+        displayMsg(msg.userName);
+    };
+
+
   return (
     <BrowserRouter>
   <div className='body'>
@@ -24,7 +35,7 @@ export default function App() {
         <NavLink className="btn btn-light" type="button" to=''>Home</NavLink>
         <NavLink className="btn btn-light" type="button" to='browse'>Cuts</NavLink>
         <NavLink className="btn btn-light" type="button" to='create'>Create</NavLink>
-        <button className="btn btn-light" type="button" onclick="notifs()">Notifications</button>
+        <button className="btn btn-light" type="button" onClick={() => notifs()}>Notifications</button>
       </div>
     </nav>
   </header>
@@ -55,3 +66,34 @@ export default function App() {
 function NotFound() {
     return <main className='container-fluid text-center'>404: Woah, you found a page that doesn't exist</main>;
 }
+
+
+
+    async function displayMsg(name) {
+      const chatText = { notif: `${name}` + " submitted a haircut!\n" };
+      var notifications = JSON.parse(localStorage.getItem("notif")) ?? [];
+      notifications.push(chatText);
+      if (notifications.length > 5) {
+        notifications.reverse();
+        notifications.length = 5;
+      }
+      notifications.forEach(element => {
+        console.log(element.notif);
+      });
+      localStorage.setItem("notif", JSON.stringify(notifications));
+    }
+
+  function notifs() {
+    const cont = JSON.parse(localStorage.getItem("notif"));
+    var stringy = "";
+    if(cont) {
+    cont.forEach(element => {
+      stringy += element.notif;
+    })
+  }
+  if (stringy) {
+    window.alert(stringy);
+  } else {
+    window.alert("No notifications");
+  }
+  }

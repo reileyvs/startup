@@ -9,7 +9,7 @@ export function Unauthenticated(props) {
   const [displayError, setDisplayError] = React.useState(null);
 
   async function loginUser() {
-    loginOrCreate(`/api/auth/login`);
+    loginOrCreate('/api/auth/login');
   }
 
   async function createUser() {
@@ -17,11 +17,12 @@ export function Unauthenticated(props) {
   }
 
   async function loginOrCreate(endpoint) {
+    console.log('hello');
     const response = await fetch(endpoint, {
-      method: 'post',
-      body: JSON.stringify({email: userName, password: password}),
+      method: 'POST',
+      body: JSON.stringify({userName: userName, password: password, hairLength: ""}),
       headers: {
-        'Content-type': 'application/json; charset=UTF-8',
+        'Content-type': 'text/plain',
       },
     });
     if (response?.status === 200) {
@@ -62,7 +63,7 @@ export function Unauthenticated(props) {
           Create
         </Button>
       </div>
-
+      <hr />
       <MessageDialog message={displayError} onHide={() => setDisplayError(null)} />
     </>
   );
