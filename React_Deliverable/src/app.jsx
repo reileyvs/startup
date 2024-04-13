@@ -7,21 +7,20 @@ import { Browse } from './browse/browse';
 import { Create } from './create/create';
 import { AuthState } from './login/authState';
 
+const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+socket.onmessage = async (message) => {
+  const thing = await message.data;
+  console.log(thing);
+  const msg = JSON.parse(message.data);
+    //Hank
+    displayMsg(msg.userName);
+};
+
 export default function App() {
   const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
   const currentAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
   const [authState, setAuthState] = React.useState(currentAuthState);
-
-  const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
-    const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
-    socket.onmessage = async (message) => {
-      const thing = await message.data;
-      console.log(thing);
-      const msg = JSON.parse(message.data);
-        //Hank
-        displayMsg(msg.userName);
-    };
-
 
   return (
     <BrowserRouter>
@@ -48,7 +47,8 @@ export default function App() {
           setAuthState(authState);
           setUserName(userName);}} />} exact />
         <Route path='/browse' element={<Browse />} />
-        <Route path='/create' element={<Create />} />
+        <Route path='/create' element={<Create
+            socket={socket} />} />
         <Route path='*' element={<NotFound />} />
     </Routes>
 
