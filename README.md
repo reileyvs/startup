@@ -83,3 +83,12 @@ For this deliverable I used WebSocket to have real-time notifications of who cre
 - **Frontend makes connection** - done
 - **Data sent** - done
 - **Data displayed** - Found by clicking the Notifications button (If you have visited this website before now, it is likely you will have to delete your localStorage value for 'notif')
+
+## React Deliverable
+
+This was a hard one! I tranferred all my files and code to be compatible and deploy with React
+
+- **Bundled and transpiled** - done!
+- **Components** - Login, browse, and create pages are components
+- **Router** - Routing between login, browse, and create pages 🕺🏼
+- **Hooks** - useState is used for user information
