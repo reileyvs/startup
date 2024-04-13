@@ -72,6 +72,7 @@ apiRouter.post('/auth/create', async (req, res) => {
 });
 
 apiRouter.post('/auth/login', async (req, res) => {
+  console.log('hi');
   const info = JSON.parse(req.body);
   const user = await getUser(info.userName);
   if (user) {
